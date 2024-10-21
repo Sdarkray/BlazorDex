@@ -1,0 +1,64 @@
+/* Estilos generales para todos los elementos */
+* {
+    box-sizing: border-box;
+}
+
+/* Contenedor principal */
+.container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Fila de tarjetas de Pokémon */
+.pokemon-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tarjeta individual de Pokémon */
+.pokemon-card {
+    width: 200px;
+    height: 250px;
+    padding: 10px;
+    background-color: #fff;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen del Pokémon */
+img {
+    width: 80%;
+    height: 60%;
+}
+
+/* Fila de tipos de Pokémon */
+.type row {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Nombre del Pokémon */
+.pokemon.name {
+    text-transform: capitalize;
+    text-decoration: none;
+    color: #000;
+}
+
+/* Insignia de tipo de Pokémon */
+.type-badge {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-right: 3px;
+}

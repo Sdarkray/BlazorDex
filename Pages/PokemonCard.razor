@@ -1,0 +1,86 @@
+@page "/pokemon"
+@using BlazorDex.Models
+@using BlazorDex.Util
+@inject PokeClient client
+
+@* Este componente representa una tarjeta de Pokémon en una aplicación Blazor. *@
+@* Muestra información detallada sobre un Pokémon específico o aleatorio. *@
+
+<div class="container">
+    <div class="card">
+        @* Muestra la imagen del Pokémon con un fondo del color de su tipo principal *@
+        @if (@pokemon.types.Count > 0)
+        {
+            <div class="card-top" style="background-color: @PokeColor.GetTypeColor(@pokemon.types[0].type.name)">
+            <img src="@pokemon.sprites.front_default" alt="pokemon sprite" class="card-img-top">
+        </div>
+        }
+        <div class="inner-container">
+            @* Sección de información general del Pokémon *@
+            <div class="stats-head">
+                <div class="icon-container">
+                    <img src="" alt="">
+                    <h1 class="pokemon-name card-tittle">@pokemon.name</h1>
+                </div>
+                <div class="pokemon-info">
+                    <h5>Heigth: @pokemon.height m</h5>
+                    @* Muestra los tipos del Pokémon con sus colores correspondientes *@
+                    <div>
+                        @foreach(var type in pokemon.types){
+                            <span class="type-badge" style="background-color: @PokeColor.GetTypeColor(@type.type.name)">@type.type.name</span>
+                        }
+                    </div>
+                    <h5>Weight: @pokemon.weight kg</h5>        
+                </div>
+            </div>
+            @* Sección de estadísticas del Pokémon *@
+            <div class="stats-head">
+                <div class="container">
+                    <h2>Stats</h2>
+                </div>
+                @* Muestra cada estadística con una barra de progreso coloreada *@
+                @foreach(var stat in pokemon.stats)
+                {
+                    <div class="stat-bar">
+                        <h5 class="stat">@stat.stat.name: @stat.base_stat</h5>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width:  @stat.base_stat%; 
+                        background-color: @PokeColor.GetStatColor(@stat.stat.name)" aria-valuenow="100" aria-valuemin="0"aria-valuemax="200"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string? PokemonId { get; set; }
+    
+    // Objeto que almacena los datos del Pokémon a mostrar
+    private Pokemon pokemon = new Pokemon();
+
+    // Se ejecuta al inicializar el componente
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Usa el PokemonId proporcionado o genera uno aleatorio
+            string idToFetch = PokemonId ?? GenerateRandomPokemonId();
+            // Obtiene los datos del Pokémon usando el cliente inyectado
+            pokemon = await client.GetPokemon(idToFetch);
+        }
+        catch (Exception ex)
+        {
+            // Maneja el error, por ejemplo, mostrando un mensaje al usuario
+            Console.WriteLine($"Error al obtener el Pokémon: {ex.Message}");
+        }
+    }
+
+    // Genera un ID aleatorio entre 1 y 898 para mostrar un Pokémon aleatorio
+    private string GenerateRandomPokemonId()
+    {
+        return new Random().Next(1, 899).ToString();
+    }
+}

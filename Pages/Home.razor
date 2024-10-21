@@ -1,0 +1,52 @@
+﻿@page "/"
+@using Models
+@using Util
+@inject PokeClient client
+
+<PageTitle>Home</PageTitle>
+
+@* Contenedor principal para la lista de Pokémon *@
+<div class="container">
+    @* Fila que contiene las tarjetas de Pokémon *@
+    <div class="pokemon-row">
+        @* Itera sobre la lista de Pokémon para mostrar cada uno *@
+        @foreach (var pokemon in pokemonList){
+            @* Tarjeta individual para cada Pokémon *@
+            <div class="pokemon-card">
+                @* Muestra la imagen frontal del Pokémon *@
+                <img src="@pokemon.sprites.front_default" alt="Pokemon Sprite">
+                @* Muestra el nombre del Pokémon *@
+                <h4 class="pokemon-name">@pokemon.name</h4>
+                @* Contenedor para los tipos del Pokémon *@
+                <div class="type-row">
+                    @* Itera sobre los tipos del Pokémon *@
+                    @foreach (var type in pokemon.types){
+                      @* Muestra cada tipo como una insignia con color correspondiente *@
+                      <span class="type-badge" style="background-color: @PokeColor.GetTypeColor(@type.type.name);">@type.type.name</span>  
+                    }
+                </div>
+                </div>
+        }
+    </div>
+</div>
+
+@code {
+    // Objeto Pokémon individual (no utilizado actualmente)
+    Pokemon pokemon = new Pokemon();
+    
+    // Lista para almacenar los primeros 10 Pokémon
+    List<Pokemon> pokemonList = new List<Pokemon>();
+    
+    // Método que se ejecuta al inicializar el componente
+    protected override async Task OnInitializedAsync()
+    {
+        // Obtiene los primeros 10 Pokémon
+        for (int i=1; i<11; i++)
+        {
+            // Añade cada Pokémon a la lista
+            pokemonList.Add(await client.GetPokemon(i.ToString()));
+            // Notifica a Blazor que el estado ha cambiado para actualizar la UI
+            StateHasChanged();
+        }
+    }
+}

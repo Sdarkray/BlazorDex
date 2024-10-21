@@ -1,0 +1,120 @@
+/* Estilos para la tarjeta de Pokémon */
+
+/* Capitaliza el nombre del Pokémon */
+.pokemon-name {
+    text-transform: capitalize;
+}
+
+/* Asegura que las imágenes se ajusten correctamente */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Capitaliza el texto de las insignias */
+.badge {
+    text-transform: capitalize;
+}
+
+/* Contenedor principal de la tarjeta */
+.container {
+    margin: 30px;
+    width: 300px;
+    overflow: hidden;
+}
+
+/* Contenedor interno para el contenido de la tarjeta */
+.inner-container {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    padding-top: 0px;
+    overflow: hidden;
+}
+
+/* Parte superior de la tarjeta con la imagen del Pokémon */
+.card-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Estilos generales de la tarjeta */
+.card {
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto de hover para la tarjeta */
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Contenedor de información básica del Pokémon */
+.pokemon-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+/* Estilo para las insignias de tipo de Pokémon */
+.type-badge {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-right: 3px;
+    margin-bottom: 5px;
+}
+
+/* Capitaliza el nombre de las estadísticas */
+.stat {
+    text-transform: capitalize;
+}
+
+/* Contenedor para cada barra de estadística */
+.stat-bar {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+/* Estilo para el icono del Pokémon */
+.poke-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+/* Contenedor para el icono y el nombre del Pokémon */
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Barra de progreso para las estadísticas */
+.stat-progress {
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Relleno de la barra de progreso */
+.stat-fill {
+    height: 100%;
+    background-color: #4CAF50;
+    transition: width 0.5s ease-out;
+}
+
